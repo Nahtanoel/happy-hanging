@@ -26,8 +26,6 @@ export default class PlayPage extends React.Component {
   }
 
   handleKeyPress = (touche) => {
-    console.log("Mot a trouver : " + motInitial);
-    console.log("Tentatives : " + this.state.tentatives);
     const toucheMin = touche.toLowerCase();
     const { motCourant, tentatives, jeuFini } = this.state;
 
