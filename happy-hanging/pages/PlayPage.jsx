@@ -1,9 +1,11 @@
+
 import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet,Image, Text } from "react-native";
 
 // Components
 import AfficheMot from "../components/AfficheMot";
 import Clavier from "../components/Clavier";
+import Bonhomme from "../components/bonhomme";
 
 // Utils
 import MotGenerator from "../utils/MotGenerator";
@@ -50,6 +52,7 @@ export default class PlayPage extends React.Component {
 
     return (
       <View style={styles.container}>
+        <Bonhomme tentatives={this.state.tentatives} />
         <AfficheMot mot={motCourant.join("")} />
         {jeuFini ? (
           <View style={styles.messageContainer}>
@@ -66,8 +69,12 @@ export default class PlayPage extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "space-evenly",
+    alignItems: "center",
+  },
+  image: {
+    width: 200, // Définissez la largeur souhaitée
+    height: 200, // Définissez la hauteur souhaitée
   },
   messageContainer: {
     alignItems: "center",
