@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 // Components
 import AfficheMot from "../components/AfficheMot";
@@ -15,34 +15,49 @@ export default class PlayPage extends React.Component {
     super(props);
     this.state = {
       motCourant: Array(motInitial.length).fill("_"),
+      tentatives: 0,
+      jeuFini: false,
+      aGagne: false,
     };
   }
 
   handleKeyPress = (touche) => {
+    console.log("Mot a trouver : " + motInitial)
+    console.log("Tentatives : " + this.state.tentatives)
     const toucheMin = touche.toLowerCase();
-    const { motCourant } = this.state;
+    const { motCourant, tentatives, jeuFini } = this.state;
 
-    console.log("motcourant : "+motCourant)
-    console.log("mot : "+motInitial)
+    if (!jeuFini) {
+      const nouveauMotCourant = motInitial
+        .split("")
+        .map((lettre, index) =>
+          lettre === toucheMin || motCourant[index] !== "_"
+            ? lettre
+            : motCourant[index]
+        );
 
-
-    // Recherchez la lettre appuyée dans le mot et mettez à jour le mot courant
-    const nouveauMotCourant = motInitial
-      .split("")
-      .map((lettre, index) =>
-        lettre === toucheMin || motCourant[index] !== "_"
-          ? lettre
-          : motCourant[index]
-      );
-    console.log('NouveauMot : ' + nouveauMotCourant )
-    this.setState({ motCourant: nouveauMotCourant });
+      this.setState((prevState) => ({
+        motCourant: nouveauMotCourant,
+        tentatives: nouveauMotCourant.join("") === motInitial ? prevState.tentatives : prevState.tentatives + 1,
+        jeuFini: nouveauMotCourant.join("") === motInitial || prevState.tentatives + 1 === 10,
+        aGagne: nouveauMotCourant.join("") === motInitial,
+      }));
+    }
   };
 
   render() {
+    const { motCourant, tentatives, jeuFini, aGagne } = this.state;
+
     return (
       <View style={styles.container}>
-        <AfficheMot mot={this.state.motCourant.join("")} />
-        <Clavier onKeyPress={this.handleKeyPress} />
+        <AfficheMot mot={motCourant.join("")} />
+        {jeuFini ? (
+          <View style={styles.messageContainer}>
+            <Text style={styles.messageText}>{aGagne ? "Vous avez gagné!" : "Vous avez perdu!"}</Text>
+          </View>
+        ) : (
+          <Clavier onKeyPress={this.handleKeyPress} />
+        )}
       </View>
     );
   }
@@ -53,5 +68,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-evenly",
+  },
+  messageContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  messageText: {
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });
