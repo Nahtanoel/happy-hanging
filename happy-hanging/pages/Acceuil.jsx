@@ -1,17 +1,17 @@
 import React from "react";
-import { View, Text, Button, TouchableOpacity } from "react-native";
-import { Actions } from "react-native-router-flux";
+import { Link } from "react-router-native";
+import {  View,Text} from "react-native";
 
-class Acceuil extends React.Component {
-
-    
+export default class Acceuil extends React.Component {
   render() {
     return (
       <View>
-        <Text> Acceuil </Text>
-        <Button title="Play" onPress={() => {Actions.playPage()}} />
+        <Text>Acceuil</Text>
+        <Link to="/playpage">
+          <Text>Jouerr</Text>
+        </Link>
       </View>
     );
-  }
+  } 
 }
-export default Acceuil;
+
