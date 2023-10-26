@@ -24,26 +24,33 @@ export default class PlayPage extends React.Component {
   }
 
   handleKeyPress = (touche) => {
-    console.log("Mot a trouver : " + motInitial)
-    console.log("Tentatives : " + this.state.tentatives)
+    console.log("Mot a trouver : " + motInitial);
+    console.log("Tentatives : " + this.state.tentatives);
     const toucheMin = touche.toLowerCase();
     const { motCourant, tentatives, jeuFini } = this.state;
 
     if (!jeuFini) {
-      const nouveauMotCourant = motInitial
-        .split("")
-        .map((lettre, index) =>
-          lettre === toucheMin || motCourant[index] !== "_"
-            ? lettre
-            : motCourant[index]
-        );
+      // Vérifiez si la lettre est présente dans le mot initial
+      if (motInitial.includes(toucheMin)) {
+        const nouveauMotCourant = motInitial
+          .split("")
+          .map((lettre, index) =>
+            lettre === toucheMin || motCourant[index] !== "_"
+              ? lettre
+              : motCourant[index]
+          );
 
-      this.setState((prevState) => ({
-        motCourant: nouveauMotCourant,
-        tentatives: nouveauMotCourant.join("") === motInitial ? prevState.tentatives : prevState.tentatives + 1,
-        jeuFini: nouveauMotCourant.join("") === motInitial || prevState.tentatives + 1 === 10,
-        aGagne: nouveauMotCourant.join("") === motInitial,
-      }));
+        this.setState((prevState) => ({
+          motCourant: nouveauMotCourant,
+          jeuFini: nouveauMotCourant.join("") === motInitial,
+          aGagne: nouveauMotCourant.join("") === motInitial,
+        }));
+      } else {
+        this.setState((prevState) => ({
+          tentatives: prevState.tentatives + 1,
+          jeuFini: prevState.tentatives + 1 === 10,
+        }));
+      }
     }
   };
 
