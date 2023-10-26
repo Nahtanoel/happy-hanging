@@ -7,8 +7,10 @@ import PlayPage from "./pages/PlayPage";
 
 
 class App extends React.Component {
+  
 
   render() {
+
     return (
       <NativeRouter>
         <View style={styles.container}>
