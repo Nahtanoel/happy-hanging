@@ -1,4 +1,4 @@
-
+import { NativeRouter, Route, Link } from "react-router-native";
 import Routes from './components/Routes'
 
 
