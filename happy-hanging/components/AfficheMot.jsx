@@ -4,7 +4,6 @@ import { View, Text, StyleSheet } from "react-native";
 export default class AfficheMot extends React.Component {
   render() {
     const { mot } = this.props;
-    const espacement = 5 * mot.length; // Calcul de l'espacement
 
     const styles = StyleSheet.create({
       motContainer: {
@@ -13,22 +12,19 @@ export default class AfficheMot extends React.Component {
       lettre: {
         fontSize: 42,
         fontWeight: "bold",
-        marginRight: espacement, // Espacement proportionnel
-      },
-      derniereLettre: {
-        fontSize: 42,
-        fontWeight: "bold",
+        marginRight: 10, // Espacement uniforme entre les lettres
       },
     });
 
-    const motAffiche = mot.split('').map((lettre, index) => (
-      <Text key={index} style={index === mot.length - 1 ? styles.derniereLettre : styles.lettre}>_</Text>
-    ));
+    const lettresAffichees = mot
+      .toUpperCase()
+      .split("")
+      .map((lettre, index) => (
+        <Text key={index} style={styles.lettre}>
+          {lettre}
+        </Text>
+      ));
 
-    return (
-      <View style={styles.motContainer}>
-        {motAffiche}
-      </View>
-    );
+    return <View style={styles.motContainer}>{lettresAffichees}</View>;
   }
 }
