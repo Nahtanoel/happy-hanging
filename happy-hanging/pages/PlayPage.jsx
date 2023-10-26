@@ -1,6 +1,5 @@
-
 import React, { useState } from "react";
-import { View, StyleSheet,Image, Text } from "react-native";
+import { View, StyleSheet, Image, Text } from "react-native";
 
 // Components
 import AfficheMot from "../components/AfficheMot";
@@ -63,7 +62,9 @@ export default class PlayPage extends React.Component {
         <AfficheMot mot={motCourant.join("")} />
         {jeuFini ? (
           <View style={styles.messageContainer}>
-            <Text style={styles.messageText}>{aGagne ? "Vous avez gagné!" : "Vous avez perdu!"}</Text>
+            <Text style={styles.messageText}>
+              {aGagne ? "Vous avez gagné!" : "Vous avez perdu!"}
+            </Text>
           </View>
         ) : (
           <Clavier onKeyPress={this.handleKeyPress} />
