@@ -11,7 +11,6 @@ export default class Clavier extends React.Component {
   }
 
   handleKeyPress = (touche) => {
-    console.log("Touche appuyée : " + touche);
     this.props.onKeyPress(touche); // Appeler la fonction de mise à jour du parent
     this.setState((prevState) => ({
       touchesAppuyees: [...prevState.touchesAppuyees, touche],
