@@ -1,6 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
-import ConfettiCannon from 'react-native-confetti-cannon';
+import { Link } from "react-router-native";
+import ConfettiCannon from "react-native-confetti-cannon";
+
 // Components
 import AfficheMot from "../components/AfficheMot";
 import Clavier from "../components/Clavier";
@@ -10,12 +12,11 @@ import Bonhomme from "../components/bonhomme";
 import MotGenerator from "../utils/MotGenerator";
 
 
-const motInitial = MotGenerator.genererMot();
-
+var motInitial;
 export default class PlayPage extends React.Component {
   constructor(props) {
     super(props);
-    
+    motInitial = MotGenerator.genererMot();
     this.state = {
       motCourant: Array(motInitial.length).fill("_"),
       tentatives: 0,
@@ -67,13 +68,21 @@ export default class PlayPage extends React.Component {
             {aGagne ? (
               <>
                 <Text style={styles.messageText}>Vous avez gagné!</Text>
-                <ConfettiCannon styles={styles.container} count={75} fadeOut={true} origin={{x: 0, y: 0}} />
+                <ConfettiCannon
+                  styles={styles.container}
+                  count={75}
+                  fadeOut={true}
+                  origin={{ x: 0, y: 0 }}
+                />
               </>
             ) : (
               <>
                 <Text style={styles.messageText}>Vous avez perdu!</Text>
               </>
             )}
+            <Link to="/" style={styles.button}>
+              <Text style={styles.buttonText}>Acceuil</Text>
+            </Link>
           </View>
         ) : (
           <Clavier onKeyPress={this.handleKeyPress} />
@@ -108,5 +117,16 @@ const styles = StyleSheet.create({
   messageText: {
     fontSize: 24,
     fontWeight: "bold",
+  },
+  button: {
+    backgroundColor: "#07a9df",
+    borderRadius: 10, // Bord arrondi
+    width: 200,
+    padding: 10, // Espacement intérieur du bouton
+  },
+  buttonText: {
+    color: "white", // Couleur du texte en blanc
+    textAlign: "center",
+    fontSize: 20, // Taille du texte du bouton
   },
 });
