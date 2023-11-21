@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Vibration, Animated } from "react-native";
 import { Link } from "react-router-native";
 import ConfettiCannon from "react-native-confetti-cannon";
 
@@ -11,7 +11,6 @@ import Bonhomme from "../components/bonhomme";
 // Utils
 import MotGenerator from "../utils/MotGenerator";
 
-
 var motInitial;
 export default class PlayPage extends React.Component {
   constructor(props) {
@@ -22,8 +21,18 @@ export default class PlayPage extends React.Component {
       tentatives: 0,
       jeuFini: false,
       aGagne: false,
+      shakeAnimation: new Animated.Value(0),
     };
   }
+
+  startShakeAnimation = () => {
+    Animated.sequence([
+      Animated.timing(this.state.shakeAnimation, { toValue: 10, duration: 50, useNativeDriver: false }),
+      Animated.timing(this.state.shakeAnimation, { toValue: -10, duration: 50, useNativeDriver: false }),
+      Animated.timing(this.state.shakeAnimation, { toValue: 10, duration: 50, useNativeDriver: false }),
+      Animated.timing(this.state.shakeAnimation, { toValue: 0, duration: 50, useNativeDriver: false }),
+    ]).start();
+  };
 
   handleKeyPress = (touche) => {
     const toucheMin = touche.toLowerCase();
@@ -46,6 +55,10 @@ export default class PlayPage extends React.Component {
           aGagne: nouveauMotCourant.join("") === motInitial,
         }));
       } else {
+        // Ajoutez ces lignes pour faire vibrer le téléphone et déclencher l'animation de secousse
+        Vibration.vibrate();
+        this.startShakeAnimation();
+
         this.setState((prevState) => ({
           tentatives: prevState.tentatives + 1,
           jeuFini: prevState.tentatives + 1 === 10,
@@ -58,7 +71,7 @@ export default class PlayPage extends React.Component {
     const { motCourant, tentatives, jeuFini, aGagne } = this.state;
 
     return (
-      <View style={styles.container}>
+      <Animated.View style={[styles.container, { transform: [{ translateX: this.state.shakeAnimation }] }]}>
         <Bonhomme tentatives={this.state.tentatives} />
         <AfficheMot mot={motCourant.join("")} />
         {jeuFini ? (
@@ -85,7 +98,7 @@ export default class PlayPage extends React.Component {
         ) : (
           <Clavier onKeyPress={this.handleKeyPress} />
         )}
-      </View>
+      </Animated.View>
     );
   }
 }

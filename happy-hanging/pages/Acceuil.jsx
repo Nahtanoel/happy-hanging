@@ -10,6 +10,10 @@ export default class Acceuil extends React.Component {
         <Link to="/playpage" style={styles.button}>
           <Text style={styles.buttonText}>Jouer</Text>
         </Link>
+
+        <Link to="/about" style={styles.button}>
+          <Text style={styles.buttonText}>A propos</Text>
+        </Link>
       </View>
     );
   }
@@ -26,6 +30,7 @@ const styles = StyleSheet.create({
     marginBottom: 220, // Espacement vertical après le titre
   },
   button: {
+    margin:6,
     backgroundColor: '#07a9df',
     borderRadius: 10, // Bord arrondi
     width: 200,
