@@ -13,9 +13,15 @@ export default class Acceuil extends React.Component {
             contentContainerStyle={styles.paragraphContainer}
             horizontal={false}
           >
-            <Image source={require('../assets/a.png')} style={styles.image} />
+            <Image source={require("../assets/a.png")} style={styles.image} />
             <Text style={styles.paragraph}>
-              Nathaniel GUIQUERRO, A travaillé sur la conception, réalisation du livrable, mise en place d'un routeur, ajout de la vibration du portable quand un mauvais choix est réalisé ,réalisation du générateur de mot ainsi que son implementation. Réalisation du clavier sur l'application et du masquage et démasquage du mot. Réalisation d'une page A propos contenant les informations de chaque membre du projet. Réalisation d'une partie du CSS.
+              Nathaniel GUIQUERRO, A travaillé sur la conception, réalisation du
+              livrable, mise en place d'un routeur, ajout de la vibration du
+              portable quand un mauvais choix est réalisé ,réalisation du
+              générateur de mot ainsi que son implementation. Réalisation du
+              clavier sur l'application et du masquage et démasquage du mot.
+              Réalisation d'une page A propos contenant les informations de
+              chaque membre du projet. Réalisation d'une partie du CSS.
             </Text>
           </ScrollView>
 
@@ -23,9 +29,12 @@ export default class Acceuil extends React.Component {
             contentContainerStyle={styles.paragraphContainer}
             horizontal={false}
           >
-            <Image source={require('../assets/b.png')} style={styles.image} />
+            <Image source={require("../assets/b.png")} style={styles.image} />
             <Text style={styles.paragraph}>
-              Guillaume PRODAULT, A travaillé sur la conception, réalisation des images pour le nombre de tentatives, ajout de nombre de tentatives et raccordement des composants dans la page pour jouer, réalisation d'une partie du CSS.
+              Guillaume PRODAULT, A travaillé sur la conception, réalisation des
+              images pour le nombre de tentatives, ajout de nombre de tentatives
+              et raccordement des composants dans la page pour jouer,
+              réalisation du CSS pour le nombre de tentatives .
             </Text>
           </ScrollView>
 
@@ -41,21 +50,21 @@ export default class Acceuil extends React.Component {
 const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     padding: 20,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
   paragraphContainer: {
-    flexDirection: 'column', // Utilisez une disposition en colonne
-    alignItems: 'center',
+    flexDirection: "column", // Utilisez une disposition en colonne
+    alignItems: "center",
     marginBottom: 20,
   },
   image: {
@@ -66,18 +75,18 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     fontSize: 16,
-    textAlign: 'justify',
-    flexWrap: 'wrap', // Permet au texte de revenir à la ligne
+    textAlign: "justify",
+    flexWrap: "wrap", // Permet au texte de revenir à la ligne
   },
   button: {
-    backgroundColor: '#07a9df',
+    backgroundColor: "#07a9df",
     borderRadius: 10,
     width: 200,
     padding: 10,
   },
   buttonText: {
-    color: 'white',
-    textAlign: 'center',
+    color: "white",
+    textAlign: "center",
     fontSize: 20,
   },
 });
